@@ -2,74 +2,50 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Categories</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-
-
-
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{%url 'home'%}">Home</a>
+          <a class="nav-link active" href="{% url 'home' %}">Home</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Products</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Pricing</a>
-        </li>
-
-
-
       </ul>
     </div>
   </div>
 </nav>
-        <div class="row">
-    <div class="col-6">
-        {%for item in pro%}
-        <div class="card" style="width: 18rem;">
-            {%if item.photo%}
-            <img src="{{item.photo.url}}" class="card-img-top" alt="...">
-            {%else%}
-            <img src="https://i.pinimg.com/1200x/eb/d7/d4/ebd7d41071f941578aaff6863e0ab27f.jpg" class="card-img-top"
-                 alt="...">
-            {%endif %}
-            <div class="card-body">
-                <h2 class="card-title">{{item.product_name}}</h2>
-                <p class="card-text">{{item.unit_price}}</p>
-            </div>
-        </div>
-        {%endfor%}
 
+<div class="container mt-4">
+  <div class="row">
+    {% for item in pro %}
+    <div class="col-md-4 mb-4">
+      <div class="card shadow-sm" style="width: 18rem;">
+        {% if item.photo %}
+          <img src="{{ item.photo.url }}" class="card-img-top" alt="Category Image">
+        {% else %}
+          <img src="https://i.pinimg.com/1200x/eb/d7/d4/ebd7d41071f941578aaff6863e0ab27f.jpg" class="card-img-top" alt="No Image">
+        {% endif %}
+        <div class="card-body">
+          <h5 class="card-title">{{ item.category_name }}</h5>
+          <p class="card-text">{{ item.description }}</p>
+
+          <div class="d-flex justify-content-between">
+            <a href="{% url 'update_category' item.id %}" class="btn btn-sm btn-warning">Edit</a>
+            <a href="{% url 'delete_category' item.id %}" class="btn btn-sm btn-danger"
+               onclick="return confirm('Rostdan ham o‘chirmoqchimisiz?');">Delete</a>
+          </div>
+        </div>
+      </div>
     </div>
+    {% endfor %}
+  </div>
 </div>
 
-
-
-
-
-
-
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
-        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
-        crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
-        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
-        crossorigin="anonymous"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

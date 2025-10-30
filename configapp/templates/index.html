@@ -7,7 +7,7 @@
 </head>
 <body class="bg-light">
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
     <div class="container">
         <a class="navbar-brand fw-bold text-white" href="{% url 'home' %}">Admin Panel</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -32,47 +32,53 @@
     <div class="row">
 
         <div class="col-md-3">
-            <h4 class="mb-3"> Categories</h4>
+            <h4 class="mb-3 text-primary">Categories</h4>
             {% if cat %}
                 <ul class="list-group">
                     {% for item in cat %}
-                        <li class="list-group-item">
-                            <a href="{% url 'category' item.id %}" class="text-decoration-none fw-bold">{{ item.category_name }}</a><br>
+                        <li class="list-group-item mb-3 shadow-sm rounded">
+                            <a href="{% url 'category' item.id %}" class="text-decoration-none fw-bold text-dark">
+                                {{ item.category_name }}
+                            </a><br>
                             <small class="text-muted">{{ item.description }}</small>
-                            <div class="mt-2">
-                                <a href="{% url 'delete_category' item.id %}" class="btn btn-sm btn-outline-danger"> Delete</a>
+                            <div class="mt-2 d-flex gap-2">
+                                <a href="{% url 'update_category' item.id %}" class="btn btn-sm btn-outline-primary">Update</a>
+                                <a href="{% url 'delete_category' item.id %}" class="btn btn-sm btn-outline-danger">Delete</a>
                             </div>
                         </li>
                     {% endfor %}
                 </ul>
             {% else %}
-                <p>Hozircha category yo‘q.</p>
+                <p class="text-muted">Hozircha category yo‘q.</p>
             {% endif %}
         </div>
 
         <div class="col-md-9">
-            <h4 class="mb-3"> Products</h4>
+            <h4 class="mb-3 text-primary">Products</h4>
             <div class="row">
                 {% if pro %}
                     {% for item in pro %}
                         <div class="col-md-4 mb-4">
-                            <div class="card shadow-sm h-100">
+                            <div class="card shadow-sm h-100 border-0 rounded-3">
                                 {% if item.photo %}
-                                    <img src="{{ item.photo.url }}" class="card-img-top" alt="{{ item.product_name }}">
+                                    <img src="{{ item.photo.url }}" class="card-img-top rounded-top" alt="{{ item.product_name }}">
                                 {% else %}
-                                    <img src="https://via.placeholder.com/300x200?text=No+Image" class="card-img-top" alt="No image">
+                                    <img src="https://via.placeholder.com/300x200?text=No+Image" class="card-img-top rounded-top" alt="No image">
                                 {% endif %}
                                 <div class="card-body">
                                     <h5 class="card-title">{{ item.product_name }}</h5>
-                                    <p class="card-text mb-1"> {{ item.unit_price }} so‘m</p>
+                                    <p class="card-text mb-1 fw-semibold text-success">{{ item.unit_price }} so‘m</p>
                                     <p class="card-text"><small class="text-muted">Kategoriya: {{ item.category.category_name }}</small></p>
-                                    <a href="{% url 'delete_product' item.id %}" class="btn btn-danger btn-sm"> O‘chirish</a>
+                                    <div class="d-flex gap-2">
+                                        <a href="{% url 'update_product' item.id %}" class="btn btn-primary btn-sm">Update</a>
+                                        <a href="{% url 'delete_product' item.id %}" class="btn btn-danger btn-sm">O‘chirish</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     {% endfor %}
                 {% else %}
-                    <p>Hozircha mahsulot yo‘q.</p>
+                    <p class="text-muted">Hozircha mahsulot yo‘q.</p>
                 {% endif %}
             </div>
         </div>

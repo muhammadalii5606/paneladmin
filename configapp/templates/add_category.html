@@ -2,16 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Category</title>
 </head>
 <body>
-<h2>Yangi Category qo‘shish</h2>
+<div class="container mt-5">
+    <h3 class="mb-4 text-primary fw-bold">Category qo‘shish</h3>
 
-<form action="{% url 'add_category' %}" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-primary btn-block">add_category</button>
-</form>
+    <form method="POST" class="p-3 bg-white rounded shadow-sm">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary mt-3">Saqlash</button>
+    </form>
+</div>
+
 
 
 
